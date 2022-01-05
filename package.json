@@ -1,0 +1,25 @@
+{
+  "name": "sacr-dcc-verification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r dotenv/config index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alessandro-marcantoni/sacr-dcc-verification.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alessandro-marcantoni/sacr-dcc-verification/issues"
+  },
+  "homepage": "https://github.com/alessandro-marcantoni/sacr-dcc-verification#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.15",
+    "verificac19-sdk": "^0.7.0"
+  }
+}
