@@ -1,5 +1,27 @@
 const { Service, Certificate, Validator } = require("verificac19-sdk")
 require("dotenv").config()
+const express = require("express")
+const awsIoT = require("aws-iot-device-sdk")
+
+const device = awsIoT.device({
+  keyPath: "sacr-raspberry.private.key",
+  certPath: "sacr-raspberry.cert.pem",
+  caPath: "root-CA.crt",
+  clientId: "sdk-nodejs-fc46e0fc-77d1-439c-8b14-bfbfdeb8f5a9",
+  host: "a1agd712iaea4u-ats.iot.us-east-1.amazonaws.com"
+})
+
+device.on('connect', function() {
+  console.log('Thing connected')
+})
+
+const app = express()
+const port = 3000
+
+app.post("/airQuality", (req, res) => {
+  device.publish("air_quality", JSON.stringify(req.body))
+  res.status(200).send()
+})
 
 const update = async () => {
   await Service.updateAll()
@@ -30,4 +52,6 @@ update().then(() => {
   }, 1000 * 60 * 60 * 24)
 })
 
-
+app.listen(port, () => {
+  console.log("Listening on port " + port)
+})
