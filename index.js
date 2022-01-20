@@ -18,6 +18,10 @@ device.on('connect', function() {
 const app = express()
 const port = 3000
 
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(express.urlencoded({ extended: true }))
+
 app.post("/airQuality", (req, res) => {
   device.publish("air_quality", JSON.stringify(req.body))
   res.status(200).send()
@@ -25,6 +29,7 @@ app.post("/airQuality", (req, res) => {
 
 app.post("/temperatureHumidity", (req, res) => {
   device.publish("temperature_humidity", JSON.stringify(req.body))
+  console.log(req.body)
   res.status(200).send()
 })
 
