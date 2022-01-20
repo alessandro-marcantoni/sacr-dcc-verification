@@ -23,6 +23,11 @@ app.post("/airQuality", (req, res) => {
   res.status(200).send()
 })
 
+app.post("/temperatureHumidity", (req, res) => {
+  device.publish("temperature_humidity", JSON.stringify(req.body))
+  res.status(200).send()
+})
+
 const update = async () => {
   await Service.updateAll()
 }
